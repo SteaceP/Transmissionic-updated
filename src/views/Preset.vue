@@ -23,13 +23,13 @@
             </ion-list-header>
 
             <ion-item>
-                <ion-label position="floating">{{ Locale.name }}</ion-label>
-                <ion-input v-model="name"></ion-input>
+                <ion-input :label="Locale.name" label-placement="floating" v-model="name"></ion-input>
             </ion-item>
 
             <ion-item class="autocomplete" v-if="connectionStatus.connected">
-              <ion-label position="floating">{{ Locale.downloadDir }}</ion-label>
               <autocomplete 
+                :label="Locale.downloadDir"
+                label-placement="floating"
                 :items="TransmissionRPC.persistentData.downloadDir"
                 :placeholder="defaultDownloadDir"
                 v-on:update="setDownloadDir">
@@ -37,8 +37,7 @@
             </ion-item>
 
             <ion-item>
-              <ion-label>{{ Locale.actions.start }}</ion-label>
-              <ion-toggle v-model="settings.start" class="swiper-no-swiping"></ion-toggle>
+              <ion-toggle v-model="settings.start" class="swiper-no-swiping">{{ Locale.actions.start }}</ion-toggle>
             </ion-item>
 
             <p>
@@ -47,34 +46,25 @@
                 </ion-list-header>
 
                 <ion-item>
-                <ion-label>
-                    {{ Locale.priority.priority }}
-                </ion-label>
-                <ion-select placeholder="Select One" v-model="settings.bandwidthPriority" :okText="Locale.ok" :cancelText="Locale.actions.cancel">
+                  <ion-select :label="Locale.priority.priority" placeholder="Select One" v-model="settings.bandwidthPriority" :okText="Locale.ok" :cancelText="Locale.actions.cancel">
                     <ion-select-option :value="1">{{ Locale.priority.high }}</ion-select-option>
                     <ion-select-option :value="0">{{ Locale.priority.normal }}</ion-select-option>
                     <ion-select-option :value="-1">{{ Locale.priority.low }}</ion-select-option>
-                </ion-select>
+                  </ion-select>
                 </ion-item>
 
                 <ion-item>
                     <div class="left">
-                        <ion-label position="floating">
-                            {{ Locale.downloadLimit }} ({{ speedUnit }})
-                        </ion-label>
-                        <ion-input v-model.number="settings.other.downloadLimit" type="number" :disabled="!settings.other.downloadLimited"></ion-input>
+                        <ion-input :label="`${Locale.downloadLimit} (${speedUnit})`" label-placement="floating" v-model.number="settings.other.downloadLimit" type="number" :disabled="!settings.other.downloadLimited"></ion-input>
                     </div>
-                    <ion-toggle v-model="settings.other.downloadLimited" slot="end" class="swiper-no-swiping"></ion-toggle>
+                    <ion-toggle :aria-label="`${Locale.downloadLimit} (${speedUnit})`" v-model="settings.other.downloadLimited" slot="end" class="swiper-no-swiping"></ion-toggle>
                 </ion-item>
 
                 <ion-item>
                     <div class="left">
-                        <ion-label position="floating">
-                            {{ Locale.uploadLimit }} ({{ speedUnit }})
-                        </ion-label>
-                        <ion-input v-model.number="settings.other.uploadLimit" type="number" :disabled="!settings.other.uploadLimited"></ion-input>
+                        <ion-input :label="`${Locale.uploadLimit} (${speedUnit})`" label-placement="floating" v-model.number="settings.other.uploadLimit" type="number" :disabled="!settings.other.uploadLimited"></ion-input>
                     </div>
-                    <ion-toggle v-model="settings.other.uploadLimited" slot="end" class="swiper-no-swiping"></ion-toggle>
+                    <ion-toggle :aria-label="`${Locale.uploadLimit} (${speedUnit})`" v-model="settings.other.uploadLimited" slot="end" class="swiper-no-swiping"></ion-toggle>
                 </ion-item>
             </p>
         </ion-list>
@@ -108,7 +98,7 @@ import {
   checkmarkOutline,
   checkmarkSharp
 } from 'ionicons/icons';
-import { defineComponent } from 'vue';
+import { defineComponent, inject } from 'vue';
 import Autocomplete from './components/Autocomplete.vue';
 import { TransmissionRPC } from "../services/TransmissionRPC";
 import { UserSettings } from '../services/UserSettings';
@@ -123,7 +113,6 @@ declare global {
 
 export default defineComponent({
     name: 'Preset',
-    inject: ["connectionStatus"],
     components: { 
         Autocomplete,
         IonContent, 
@@ -164,12 +153,14 @@ export default defineComponent({
     },
     setup() {
         Utils.pushState();
+        const connectionStatus = inject('connectionStatus') as Record<string, any>;
 
         return { 
             Locale,
             TransmissionRPC,
             checkmarkOutline,
-            checkmarkSharp
+            checkmarkSharp,
+            connectionStatus
         }
     },
     async created() {

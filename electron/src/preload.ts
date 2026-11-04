@@ -75,5 +75,5 @@ ipcRenderer.on("shortcut", (event, shortcut: string) => {
 })
 
 ipcRenderer.on('application-menu', (event, appMenu) => {
-  titleBar.updateMenu(appMenu);
+  titleBar.updateOptions({ menu: appMenu });
 });

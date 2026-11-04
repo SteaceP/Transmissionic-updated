@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, inject } from 'vue';
 import { 
   IonContent,
   IonSpinner
@@ -29,15 +29,19 @@ import { Utils } from '../../services/Utils';
 
 export default defineComponent({
   name: 'ConnectionStatus',
-  inject: ["connectionStatus","serverCount"],
   components: { 
     IonContent,
     IonSpinner
   },
   setup() {
+    const connectionStatus = inject('connectionStatus') as Record<string, any>;
+    const serverCount = inject('serverCount') as number;
+
     return { 
       Locale,
-      Utils
+      Utils,
+      connectionStatus,
+      serverCount
     }
   },
   methods: {

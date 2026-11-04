@@ -6,6 +6,9 @@
   <div class="autocomplete-wrapper">
     <ion-input
       v-bind="$attrs"
+      :label="label"
+      :label-placement="label ? labelPlacement : undefined"
+      :aria-label="ariaLabel || (!label ? (placeholder || 'Search') : undefined)"
       v-model="search"
       :placeholder="placeholder"
       @click="onChange"
@@ -28,7 +31,7 @@
           @mousedown="$event.stopPropagation()"
           class="autocomplete-result"
           :class="{ 'is-active': i === arrowCounter }"
-          detail="false">
+          :detail="false">
           <ion-label class="item text-wrap">
             {{ result }}
           </ion-label>
@@ -50,7 +53,23 @@ import { Utils } from "../../services/Utils";
 
 export default defineComponent({
 	name: 'autocomplete',
+  inheritAttrs: false,
   props: {
+    label: {
+      type: String,
+      required: false,
+      default: undefined
+    },
+    labelPlacement: {
+      type: String as () => 'floating' | 'stacked' | 'fixed' | 'start' | 'end',
+      required: false,
+      default: 'floating'
+    },
+    ariaLabel: {
+      type: String,
+      required: false,
+      default: undefined
+    },
     items: {
       type: Array,
       required: false,

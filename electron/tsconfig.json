@@ -5,9 +5,10 @@
     "outDir": "./build",
     "importHelpers": true,
     "target": "ES2017",
-    "module": "CommonJS",
-    "moduleResolution": "node",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
     "esModuleInterop": true,
+    "skipLibCheck": true,
     "typeRoots": ["./node_modules/@types"],
     "allowJs": true,
     "rootDir": "."

@@ -3,10 +3,9 @@ import {
   getCapacitorElectronConfig,
   setupElectronDeepLinking,
 } from '@capacitor-community/electron';
-import { app, shell, ipcMain, net, Menu, BrowserWindow, dialog } from 'electron';
+import { app, shell, ipcMain, net, Menu, MenuItem, BrowserWindow, dialog } from 'electron';
 import fs from "fs";
 import electronIsDev from 'electron-is-dev';
-import unhandled from 'electron-unhandled';
 import { autoUpdater } from 'electron-updater';
 
 import {
@@ -17,11 +16,18 @@ import {
 
 let mainWindow: Electron.BrowserWindow;
 let request: Electron.ClientRequest;
-let openFiles: Array<string>;
-let openMagnet: string;
+let openFiles: Array<string> = [];
+let openMagnet: string | null = null;
 
 // Graceful handling of unhandled errors.
-unhandled();
+const importDynamic = new Function('modulePath', 'return import(modulePath)') as <T>(modulePath: string) => Promise<T>;
+const unhandledPromise = importDynamic<typeof import('electron-unhandled')>('electron-unhandled')
+  .then(({ default: unhandled }) => {
+    unhandled();
+  })
+  .catch((err) => {
+    console.error('Failed to initialize electron-unhandled:', err);
+  });
 
 // Get Config options from capacitor.config
 const capacitorFileConfig: CapacitorElectronConfig =
@@ -61,6 +67,7 @@ if (!gotTheLock) {
 
   // Run Application
   (async () => {
+    await unhandledPromise;
     // Wait for electron app to be ready.
     await app.whenReady();
     // Security - Set Content-Security-Policy based on whether or not we are in dev mode.
@@ -141,11 +148,13 @@ const sendFiles = debounce(() => {
   openFiles=[];
 });
 
-function debounce(func: Function, timeout=500){
-  let timer: NodeJS.Timeout;
-  return (...args: Array<any>) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => { func.apply(this, args); }, timeout);
+function debounce<T extends (...args: any[]) => any>(func: T, timeout = 500) {
+  let timer: NodeJS.Timeout | undefined;
+  return function (this: any, ...args: Parameters<T>) {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, timeout);
   };
 }
 
@@ -170,13 +179,13 @@ function loadTorrents() {
   return result;
 }
 
-function getMagnet(args: Array<any>): string {
-  let result=null;
+function getMagnet(args: Array<string>): string | null {
+  let result: string | null = null;
   args.forEach((arg: string) => {
-    if(arg && arg.toLowerCase().startsWith("magnet:") && result==null){
+    if (arg && arg.toLowerCase().startsWith('magnet:') && result == null) {
       result = arg;
     }
-  })
+  });
   return result;
 }
 
@@ -194,7 +203,7 @@ const sendApplicationMenu = (webContents: Electron.WebContents): void => {
 
 const getCircularReplacer = (): any => {
   const seen = new WeakSet();
-  return (key, value) => {
+  return (key: string, value: any) => {
     if (key === 'commandsMap') return;
     if (typeof value === 'object' && value !== null) {
       if (seen.has(value)) {
@@ -206,7 +215,13 @@ const getCircularReplacer = (): any => {
   };
 };
 
-const getMenuItemByCommandId = (commandId: number, menu = Menu.getApplicationMenu()) => {
+const getMenuItemByCommandId = (
+  commandId: number,
+  menu: Menu | null | undefined = Menu.getApplicationMenu()
+): MenuItem | undefined => {
+  if (!menu) {
+    return undefined;
+  }
   for (let i = 0; i < menu.items.length; i++) {
     const item = menu.items[i];
     if (item.commandId === commandId) {
@@ -218,6 +233,7 @@ const getMenuItemByCommandId = (commandId: number, menu = Menu.getApplicationMen
       }
     }
   }
+  return undefined;
 };
 
 const setDefaultRoleAccelerators = (menu: any): void => {
@@ -241,6 +257,7 @@ ipcMain.on('menu-event', (event, commandId: number) => {
 
 ipcMain.on('window-event', (event, arg: string) => {
   const window = BrowserWindow.fromWebContents(event.sender);
+  if (!window) return;
   switch (arg) {
     case 'minimize':
       window.minimize();
@@ -255,12 +272,12 @@ ipcMain.on('window-event', (event, arg: string) => {
 });
 
 ipcMain.on('window-state', (event) => {
-  event.returnValue = BrowserWindow.fromWebContents(event.sender).isMaximized();
+  event.returnValue = BrowserWindow.fromWebContents(event.sender)?.isMaximized() ?? false;
 });
 
 ipcMain.handle('request', async (event, args: Record<string,any>) => {
   return new Promise(function (resolve, reject) {
-    let result;
+    let result: Record<string, any>;
     request = net.request(args.options)
     request.on('response', (response) => {
       let content="";

@@ -139,9 +139,9 @@ export const FileHandler = {
     torrentFiles = [];
     this.newTorrentModal(files,"file");
   },
-  async parseBuffer(buffer: ArrayBuffer): Promise<Record<string,any>|void> {
+  async parseBuffer(buffer: ArrayBuffer | Uint8Array): Promise<Record<string,any>|void> {
     try {
-      return parseTorrent(buffer);
+      return await parseTorrent(buffer instanceof Uint8Array ? buffer : new Uint8Array(buffer));
     } catch (error: any) {
       Utils.responseToast(error.message);
     }

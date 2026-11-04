@@ -97,7 +97,10 @@ export default defineComponent({
       regionNames = new Intl.DisplayNames(
         [UserSettings.getLanguage()], {type: 'region'}
       );
-    } catch (e) { console.error('Intl.DisplayNames not supported') }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error('Intl.DisplayNames not supported');
+    }
   },
   methods: {
     flagAttributes(adress: string) {

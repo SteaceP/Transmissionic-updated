@@ -70,8 +70,9 @@
               </ion-list-header>
 
               <ion-item class="autocomplete" v-if="connectionStatus.connected">
-                <ion-label position="floating">{{ Locale.downloadDir }}</ion-label>
                 <autocomplete 
+                  :label="Locale.downloadDir"
+                  label-placement="floating"
                   :value="settings.downloadDir"
                   :items="TransmissionRPC.persistentData.downloadDir"
                   :placeholder="defaultDownloadDir"
@@ -80,17 +81,11 @@
               </ion-item>
 
               <ion-item>
-                <ion-label>{{ Locale.actions.start }}</ion-label>
-                <span class="swiper-no-swiping" slot="end">
-                  <ion-toggle v-model="settings.start"></ion-toggle>
-                </span>
+                <ion-toggle v-model="settings.start" class="swiper-no-swiping">{{ Locale.actions.start }}</ion-toggle>
               </ion-item>
 
               <ion-item>
-                <ion-label>
-                  {{ Locale.priority.priority }}
-                </ion-label>
-                <ion-select placeholder="Select One" v-model="settings.bandwidthPriority" :okText="Locale.ok" :cancelText="Locale.actions.cancel">
+                <ion-select :label="Locale.priority.priority" placeholder="Select One" v-model="settings.bandwidthPriority" :okText="Locale.ok" :cancelText="Locale.actions.cancel">
                   <ion-select-option :value="1">{{ Locale.priority.high }}</ion-select-option>
                   <ion-select-option :value="0">{{ Locale.priority.normal }}</ion-select-option>
                   <ion-select-option :value="-1">{{ Locale.priority.low }}</ion-select-option>
@@ -183,6 +178,7 @@
               <div class="torrent">
                 <div class="side">
                   <ion-checkbox
+                    :aria-label="item.data.name || item.torrent"
                     v-bind="checkedAttributes(item.data.infoHash)"
                     v-on:ionChange="checboxUpdate($event,item.data.infoHash)">
                   </ion-checkbox>
@@ -635,6 +631,7 @@ p {
   height: 38px;
   overflow: hidden;
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }

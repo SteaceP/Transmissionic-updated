@@ -22,8 +22,7 @@
         </ion-list-header>
 
         <ion-item>
-          <ion-label>{{ Locale.language }}</ion-label>
-          <ion-select placeholder="Select One" v-model="sharedState.language" :okText="Locale.ok" :cancelText="Locale.actions.cancel">
+          <ion-select :label="Locale.language" placeholder="Select One" v-model="sharedState.language" :okText="Locale.ok" :cancelText="Locale.actions.cancel">
             <ion-select-option value="default">{{ Locale.default }}</ion-select-option>
             <ion-select-option value="cs">Čeština</ion-select-option>
             <ion-select-option value="de">Deutsch</ion-select-option>
@@ -50,8 +49,7 @@
         </ion-item>
           
         <ion-item>
-          <ion-label>{{ Locale.theme }}</ion-label>
-          <ion-select placeholder="Select One" v-model="sharedState.colorScheme" :okText="Locale.ok" :cancelText="Locale.actions.cancel">
+          <ion-select :label="Locale.theme" placeholder="Select One" v-model="sharedState.colorScheme" :okText="Locale.ok" :cancelText="Locale.actions.cancel">
             <ion-select-option value="default">{{ Locale.default }}</ion-select-option>
             <ion-select-option value="light">{{ Locale.light }}</ion-select-option>
             <ion-select-option value="dark">{{ Locale.dark }}</ion-select-option>
@@ -59,28 +57,23 @@
         </ion-item>
 
         <ion-item>
-          <ion-label>{{ Locale.speedUnit }}</ion-label>
-          <ion-toggle v-model="sharedState.useBits"></ion-toggle>
+          <ion-toggle v-model="sharedState.useBits">{{ Locale.speedUnit }}</ion-toggle>
         </ion-item>
         
         <ion-item>
-          <ion-label>{{ Locale.compactMode }}</ion-label>
-          <ion-toggle v-model="sharedState.compactMode"></ion-toggle>
+          <ion-toggle v-model="sharedState.compactMode">{{ Locale.compactMode }}</ion-toggle>
         </ion-item>
 
         <ion-item>
-          <ion-label>{{ Locale.expandSideMenu }}</ion-label>
-          <ion-toggle v-model="sharedState.expandMenu"></ion-toggle>
+          <ion-toggle v-model="sharedState.expandMenu">{{ Locale.expandSideMenu }}</ion-toggle>
         </ion-item>
 
         <ion-item>
-          <ion-label>{{ Locale.showTrackerList }}</ion-label>
-          <ion-toggle v-model="sharedState.showTrackerList"></ion-toggle>
+          <ion-toggle v-model="sharedState.showTrackerList">{{ Locale.showTrackerList }}</ion-toggle>
         </ion-item>
         
         <ion-item>
-          <ion-label>{{ Locale.displayFlag }}*</ion-label>
-          <ion-toggle v-model="sharedState.ipFlags"></ion-toggle>
+          <ion-toggle v-model="sharedState.ipFlags">{{ Locale.displayFlag }}*</ion-toggle>
         </ion-item>
         <div class="annotation">
           * {{ Locale.formatString(Locale.useIpApi,'country.is') }} <a href="http://country.is/" target="_blank" rel="noopener"><ion-icon slot="icon-only" :ios="informationCircleOutline" :md="informationCircleSharp"></ion-icon></a>
@@ -95,12 +88,10 @@
         </ion-list-header>
 
         <ion-item>
-          <ion-label position="floating">{{ Locale.refreshInterval }}</ion-label>
-          <ion-input type="number" v-model.number="sharedState.refreshInterval" ></ion-input>
+          <ion-input :label="Locale.refreshInterval" label-placement="floating" type="number" v-model.number="sharedState.refreshInterval" ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">{{ Locale.connectionTimeout }}</ion-label>
-          <ion-input type="number" v-model.number="sharedState.timeout" ></ion-input>
+          <ion-input :label="Locale.connectionTimeout" label-placement="floating" type="number" v-model.number="sharedState.timeout" ></ion-input>
         </ion-item>
       </ion-list>
 
@@ -112,13 +103,11 @@
         </ion-list-header>
         
         <ion-item>
-          <ion-label>{{ Locale.name }}</ion-label>
-          <ion-checkbox slot="start" v-model.boolean="sharedState.searchByName"></ion-checkbox>
+          <ion-checkbox v-model.boolean="sharedState.searchByName">{{ Locale.name }}</ion-checkbox>
         </ion-item>
 
         <ion-item>
-          <ion-label>{{ Locale.downloadDir }}</ion-label>
-          <ion-checkbox slot="start" v-model.boolean="sharedState.searchByDirectory"></ion-checkbox>
+          <ion-checkbox v-model.boolean="sharedState.searchByDirectory">{{ Locale.downloadDir }}</ion-checkbox>
         </ion-item>
       </ion-list>
 
@@ -130,8 +119,7 @@
         </ion-list-header>
         
         <ion-item>
-          <ion-label>{{ Locale.rememberSelectedPreset }}</ion-label>
-          <ion-toggle v-model="sharedState.rememberSelectedPreset"></ion-toggle>
+          <ion-toggle v-model="sharedState.rememberSelectedPreset">{{ Locale.rememberSelectedPreset }}</ion-toggle>
         </ion-item>
         
         <div class="ion-padding small">
@@ -149,8 +137,7 @@
         </ion-list-header>
         
         <ion-item>
-          <ion-label>{{ Locale.openMagnetLinks }}</ion-label>
-          <ion-toggle v-model="sharedState.openMagnetLinks"></ion-toggle>
+          <ion-toggle v-model="sharedState.openMagnetLinks">{{ Locale.openMagnetLinks }}</ion-toggle>
         </ion-item>
       </ion-list>
 
@@ -252,7 +239,11 @@ const bookmarkletFunction = (href: string) => {
       }
     });
   }
-  found ? window.open(href+"#"+encodeURIComponent(selection)) : alert("No torrent or magnet link found.");
+  if (found) {
+    window.open(href+"#"+encodeURIComponent(selection));
+  } else {
+    alert("No torrent or magnet link found.");
+  }
 }
 
 export default defineComponent({
@@ -353,7 +344,9 @@ export default defineComponent({
         const content = Buffer.from(await FileHandler.readFile(files[0])).toString();
         try {
           json = JSON.parse(content);
-        } catch (e) {json={}}
+        } catch {
+          json = {};
+        }
 
         if(this.validatePreset(json)){
           UserSettings.savePresets(json);

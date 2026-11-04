@@ -362,7 +362,7 @@ export default defineComponent({
       loading.dismiss();
     },
     async torrentActions() {
-      let buttons = [
+      const buttons = [
         {
           text: Locale.formatString(Locale.actions.startNow).toString(),
           handler: () => this.torrentAction("start-now",this.id)

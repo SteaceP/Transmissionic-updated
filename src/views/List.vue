@@ -529,7 +529,7 @@ export default defineComponent({
       const torrent = this.getTorrentsByIds([id])[0];
       const selection = this.privateState.selection.length>0 ? this.privateState.selection : [torrent.id];
 
-      let buttons = [
+      const buttons = [
         {
           text: (this.privateState.selection.length==0) ? Locale.actions.select : Locale.actions.selectAll,
           handler: () => {
@@ -603,7 +603,7 @@ export default defineComponent({
     },
     async setLocation(torrentIds: Array<number>) {
       const list = this.getTorrentsByIds(torrentIds);
-      let downloadDir = list.every((val, i, arr) => val.downloadDir === arr[0].downloadDir) ? list[0].downloadDir : '';
+      const downloadDir = list.every((val, i, arr) => val.downloadDir === arr[0].downloadDir) ? list[0].downloadDir : '';
       const modal = await modalController
         .create({
           component: LocationAlert,

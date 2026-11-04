@@ -4,7 +4,7 @@
 
 <template>
     <span class="swiper-no-swiping">
-        <ion-toggle v-model="checked"></ion-toggle>
+        <ion-toggle :aria-label="ariaLabel || ($attrs['aria-label'] as string)" v-model="checked"></ion-toggle>
     </span>
 </template>
 
@@ -15,7 +15,7 @@ import {
 } from '@ionic/vue';
 
 export default defineComponent({
-    props: ['value','true','false'],
+    props: ['value','true','false','ariaLabel'],
     components: {
         IonToggle,
     },
