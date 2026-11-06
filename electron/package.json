@@ -1,6 +1,7 @@
 {
   "name": "transmissionic",
   "version": "1.8.0",
+  "desktopName": "com.sleroy.transmissionic.desktop",
   "description": "Remote for Transmission Daemon",
   "author": {
     "name": "Samuel Leroy",
