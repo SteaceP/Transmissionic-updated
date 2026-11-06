@@ -44,7 +44,7 @@
         "MimeType": "application/x-bittorrent;x-scheme-handler/magnet;"
       }
     },
-    "icon": "assets/appIcon.icns",
+    "icon": "assets/appIcon.png",
     "target": [
       {
         "target": "AppImage"
