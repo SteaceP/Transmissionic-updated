@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "lint": "eslint .",
     "build:webui": "npm run prebuild:webui && npm run build && npm run postbuild:webui",
     "prebuild:webui": "node scripts/prebuild-webui.js",
     "postbuild:webui": "node scripts/postbuild-webui.js",
