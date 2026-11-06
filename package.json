@@ -1,6 +1,6 @@
 {
   "name": "transmissionic",
-  "version": "1.8.0",
+  "version": "2.0.0",
   "desktopName": "com.sleroy.transmissionic.desktop",
   "private": true,
   "scripts": {
