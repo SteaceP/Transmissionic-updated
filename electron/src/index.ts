@@ -483,7 +483,7 @@ function getMainMenu(): Electron.MenuItemConstructorOptions[] {
           label: 'Report issue',
           accelerator: 'Alt+R',
           click(): void {
-            shell.openExternal("https://github.com/6c65726f79/Transmissionic/issues/new/choose");
+            shell.openExternal("https://github.com/SteaceP/Transmissionic-updated/issues/new/choose");
           }
         },
         {

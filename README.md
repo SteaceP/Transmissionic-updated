@@ -13,10 +13,10 @@
 
 ---
 
-![Version](https://img.shields.io/github/v/release/6c65726f79/Transmissionic?label=Release)
-![Dev](https://img.shields.io/github/package-json/v/6c65726f79/Transmissionic/dev?color=orange&label=Dev)
-![GitHub all releases](https://img.shields.io/github/downloads/6c65726f79/Transmissionic/total?label=Downloads)
-![Build](https://img.shields.io/github/actions/workflow/status/6c65726f79/Transmissionic/build.yml?label=Build&branch=main)
+![Version](https://img.shields.io/github/v/release/SteaceP/Transmissionic-updated?label=Release)
+![Dev](https://img.shields.io/github/package-json/v/SteaceP/Transmissionic-updated/dev?color=orange&label=Dev)
+![GitHub all releases](https://img.shields.io/github/downloads/SteaceP/Transmissionic-updated/total?label=Downloads)
+![Build](https://img.shields.io/github/actions/workflow/status/SteaceP/Transmissionic-updated/build.yml?label=Build&branch=main)
 [![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/6c65726f79_Transmissionic?label=Quality%20gate&logo=sonarcloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/dashboard?id=6c65726f79_Transmissionic)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=6c65726f79_Transmissionic&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=6c65726f79_Transmissionic)
 
@@ -104,7 +104,7 @@ You must first [enable remote access](https://github.com/transmission/transmissi
 
 ## Web UI
 
-Download `Transmissionic-webui-[version].zip` from the [latest release](https://github.com/6c65726f79/Transmissionic/releases/latest) page and unzip it.
+Download `Transmissionic-webui-[version].zip` from the [latest release](https://github.com/SteaceP/Transmissionic-updated/releases/latest) page and unzip it.
 
 ### Method 1
 
@@ -144,25 +144,25 @@ Don't forget to save your current `public_html` folder if you want to switch bac
 
 ## Linux
 
-Download the [AppImage](https://appimage.org/) from the [latest release](https://github.com/6c65726f79/Transmissionic/releases/latest) page.
+Download the [AppImage](https://appimage.org/) from the [latest release](https://github.com/SteaceP/Transmissionic-updated/releases/latest) page.
 
 It's recommended to use [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher) to take advantage of the torrent file assosiation and magnet link handling.
 
 ## macOS
 
-Download the DMG from the [latest release](https://github.com/6c65726f79/Transmissionic/releases/latest) page.
+Download the DMG from the [latest release](https://github.com/SteaceP/Transmissionic-updated/releases/latest) page.
 
 When you try to install it, you will get an error. After getting the error, go to `System Preferences > Security & Privacy` and click on `Open Anyway`.
 
 ## iOS
 
-Download the IPA from the [latest release](https://github.com/6c65726f79/Transmissionic/releases/latest) page.
+Download the IPA from the [latest release](https://github.com/SteaceP/Transmissionic-updated/releases/latest) page.
 
 Use a tool like [AltStore](https://altstore.io/) to sideload the app on your device.
 
 ## Other
 
-Simply download the installer for the desired platform from the [latest release](https://github.com/6c65726f79/Transmissionic/releases/latest) page and install it.
+Simply download the installer for the desired platform from the [latest release](https://github.com/SteaceP/Transmissionic-updated/releases/latest) page and install it.
 
 # Configuration
 

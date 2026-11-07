@@ -18,7 +18,7 @@
       </p>
       <p>
         {{formatText(Locale.about.github).before}}
-        <a href="https://github.com/6c65726f79/Transmissionic" target="_blank" rel="noopener">https://github.com/6c65726f79/Transmissionic</a>
+        <a href="https://github.com/SteaceP/Transmissionic-updated" target="_blank" rel="noopener">https://github.com/SteaceP/Transmissionic-updated</a>
         {{formatText(Locale.about.github).after}}
       </p>
       <p>
@@ -114,14 +114,14 @@ export default defineComponent({
       }
     },
     checkForUpdates() {
-      fetch('https://api.github.com/repos/6c65726f79/Transmissionic/releases/latest')
+      fetch('https://api.github.com/repos/SteaceP/Transmissionic-updated/releases/latest')
         .then(async (response) => {
           Utils.responseToast("success");
           const result = await response.json()
           if(!result.prerelease){
             this.updateAvailable = this.isNewerVersion(this.appVersion,result.name)
             this.newVersion = result.name;
-            this.downloadUrl = `https://github.com/6c65726f79/Transmissionic/releases/tag/${result.name}`;
+            this.downloadUrl = `https://github.com/SteaceP/Transmissionic-updated/releases/tag/${result.name}`;
           }
         })
       

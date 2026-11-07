@@ -13,6 +13,8 @@
   ],
   "publish": {
     "provider": "github",
+    "owner": "SteaceP",
+    "repo": "Transmissionic-updated",
     "vPrefixedTagName": true
   },
   "protocols": [
