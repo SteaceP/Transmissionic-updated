@@ -11,7 +11,7 @@
   
 </p>
 
-----
+---
 
 ![Version](https://img.shields.io/github/v/release/6c65726f79/Transmissionic?label=Release)
 ![Dev](https://img.shields.io/github/package-json/v/6c65726f79/Transmissionic/dev?color=orange&label=Dev)
@@ -20,25 +20,25 @@
 [![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/6c65726f79_Transmissionic?label=Quality%20gate&logo=sonarcloud&server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/dashboard?id=6c65726f79_Transmissionic)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=6c65726f79_Transmissionic&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=6c65726f79_Transmissionic)
 
-<a href='https://play.google.com/store/apps/details?id=com.sleroy.transmissionic&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' width="240" src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+<a href='https://play.google.com/store/apps/details?id=com.steacep.transmissionic&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' width="240" src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 
 # About
 
 ## Main features
 
-* Manage multiple servers
-* Add torrent from local file or magnet link
-* Drag & drop torrent file
-* Magnet protocol support
-* Start/stop/reannounce/verify/delete one or more torrents
-* Modify torrent's options
-* Set the location of a torrent
-* Select and rename torrent's files
-* Edit tracker list
-* View the list of peers with country flags
-* Sort torrents by trackers
-* Open files in explorer
-* Use presets when adding torrents
+- Manage multiple servers
+- Add torrent from local file or magnet link
+- Drag & drop torrent file
+- Magnet protocol support
+- Start/stop/reannounce/verify/delete one or more torrents
+- Modify torrent's options
+- Set the location of a torrent
+- Select and rename torrent's files
+- Edit tracker list
+- View the list of peers with country flags
+- Sort torrents by trackers
+- Open files in explorer
+- Use presets when adding torrents
 
 ## Screenshots
 
@@ -47,6 +47,7 @@
 ## Translation
 
 Available languages:
+
 - **Czech** (Cyril Veverka, Ti)
 - **German** (Alain Nussbaumer)
 - **Austrian German** (Alain Nussbaumer, Tobias W)
@@ -77,21 +78,21 @@ Thanks to all contributors.
 
 ### Web UI
 
-| Browser         | Chrome    | Firefox   | Safari    | Edge      | IE        | Chrome for Android | Safari on iOS  |
-| --------------- | --------- | --------- | --------- | --------- | --------- | ------------------ | -------------- |
-| Version         | ≥23 ✔     | ≥21 ✔     | ≥6 ✔      | ≥79 ✔     | ❌         | ≥90 ✔              | ≥6 ✔           |
+| Browser | Chrome | Firefox | Safari | Edge  | IE  | Chrome for Android | Safari on iOS |
+| ------- | ------ | ------- | ------ | ----- | --- | ------------------ | ------------- |
+| Version | ≥23 ✔  | ≥21 ✔   | ≥6 ✔   | ≥79 ✔ | ❌  | ≥90 ✔              | ≥6 ✔          |
 
 ### Application
 
-| OS              | Windows   | Linux     | macOS     | Android   | iOS       |
-| --------------- | --------- | --------- | --------- | --------- | --------- |
-| Version         | ≥10 ✔     | ✔        | ≥10.11 ✔  | ≥5.0 ✔    | ≥12 ✔     |
+| OS      | Windows | Linux | macOS    | Android | iOS   |
+| ------- | ------- | ----- | -------- | ------- | ----- |
+| Version | ≥10 ✔   | ✔     | ≥10.11 ✔ | ≥5.0 ✔  | ≥12 ✔ |
 
 ## Motivations
 
-* Provide a unified interface for all platforms
-* Improve myself on Vue.js and Ionic
-* Get familiar with GitHub
+- Provide a unified interface for all platforms
+- Improve myself on Vue.js and Ionic
+- Get familiar with GitHub
 
 ## Inspirations
 
@@ -110,6 +111,7 @@ Download `Transmissionic-webui-[version].zip` from the [latest release](https://
 Set an [environment variable](https://github.com/transmission/transmission/blob/main/docs/Environment-Variables.md) named `TRANSMISSION_WEB_HOME` with the path of the extracted folder as value.
 
 Example:
+
 ```bash
 export TRANSMISSION_WEB_HOME=/path/to/transmissionic/folder
 ```
@@ -174,53 +176,52 @@ The settings are stored on the client side, but you can overwrite the default se
 
 The file can contain the following key/value pairs:
 
-| Key                    | Type          | Description                           | Default |
-| ---------------------- | ------------- | ------------------------------------- | ------------------------ |
-| colorScheme            | `string`      | Possible values: `light` or `dark`    | System default |
-| language               | `string`      | An ISO 639-1 language code, example: `en-US` | System default |
-| orderBy                | `string`      | Possible values: `name`, `addedDate`, `sizeWhenDone`, `uploadRatio`, `uploadedEver`, `rateUpload`, `activityDate`, `queuePosition` | `addedDate` |
-| reverse                | `boolean`     | Reversed ordering                     | `true` |
-| useBits                | `boolean`     | Display speed in bit/s                | `true` |
-| expandMenu             | `boolean`     | Expand side menu on large screen      | `true` |
-| searchByName           | `boolean`     | Search torrents by name               | `true` |
-| searchByDirectory      | `boolean`     | Search torrents by download directory | `true` |
-| ipFlags                | `boolean`     | Display peer flag                     | `false` |
-| openMagnetLinks        | `boolean`     | Open magnet links with Transmissionic | `false` |
-| rememberSelectedPreset | `boolean`     | Remember selected preset when adding torrents | `false` |
-| compactMode            | `boolean`     | Compact torrent list                  | `false` |
-| showTrackerList        | `boolean`     | Always show the list of trackers in the side menu | `false` |
-| refreshInterval        | `number`      | Refresh interval in seconds           | `5` |
-| timeout                | `number`      | Connection timeout in seconds         | `10` |
-| servers                | `array`       | Default servers                       | `[]` |
+| Key                    | Type      | Description                                                                                                                        | Default        |
+| ---------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| colorScheme            | `string`  | Possible values: `light` or `dark`                                                                                                 | System default |
+| language               | `string`  | An ISO 639-1 language code, example: `en-US`                                                                                       | System default |
+| orderBy                | `string`  | Possible values: `name`, `addedDate`, `sizeWhenDone`, `uploadRatio`, `uploadedEver`, `rateUpload`, `activityDate`, `queuePosition` | `addedDate`    |
+| reverse                | `boolean` | Reversed ordering                                                                                                                  | `true`         |
+| useBits                | `boolean` | Display speed in bit/s                                                                                                             | `true`         |
+| expandMenu             | `boolean` | Expand side menu on large screen                                                                                                   | `true`         |
+| searchByName           | `boolean` | Search torrents by name                                                                                                            | `true`         |
+| searchByDirectory      | `boolean` | Search torrents by download directory                                                                                              | `true`         |
+| ipFlags                | `boolean` | Display peer flag                                                                                                                  | `false`        |
+| openMagnetLinks        | `boolean` | Open magnet links with Transmissionic                                                                                              | `false`        |
+| rememberSelectedPreset | `boolean` | Remember selected preset when adding torrents                                                                                      | `false`        |
+| compactMode            | `boolean` | Compact torrent list                                                                                                               | `false`        |
+| showTrackerList        | `boolean` | Always show the list of trackers in the side menu                                                                                  | `false`        |
+| refreshInterval        | `number`  | Refresh interval in seconds                                                                                                        | `5`            |
+| timeout                | `number`  | Connection timeout in seconds                                                                                                      | `10`           |
+| servers                | `array`   | Default servers                                                                                                                    | `[]`           |
 
 Server object:
 
-| Key      | Type          | Description                                |
-| -------- | ------------- | ------------------------------------------ |
-| name     | `string`      | Name to display                            |
-| host     | `string`      | Hostname or IP address of Transmission RPC |
-| path     | `string`      | Path of Transmission RPC                   |
-| port     | `number`      | Port of Transmission RPC                   |
-| https    | `boolean`     | Use HTTPS                                  |
-
+| Key   | Type      | Description                                |
+| ----- | --------- | ------------------------------------------ |
+| name  | `string`  | Name to display                            |
+| host  | `string`  | Hostname or IP address of Transmission RPC |
+| path  | `string`  | Path of Transmission RPC                   |
+| port  | `number`  | Port of Transmission RPC                   |
+| https | `boolean` | Use HTTPS                                  |
 
 Configuration file example:
 
 ```json
 {
-  "colorScheme":"dark",
-  "language":"en",
-  "orderBy":"name",
-  "reverse":false,
-  "ipFlags":true,
-  "refreshInterval":10,
-  "timeout":20,
-  "servers":[
+  "colorScheme": "dark",
+  "language": "en",
+  "orderBy": "name",
+  "reverse": false,
+  "ipFlags": true,
+  "refreshInterval": 10,
+  "timeout": 20,
+  "servers": [
     {
-      "name":"My server",
-      "host":"transmission.myserver.com",
-      "path":"/my/transmission/rpc",
-      "https":true
+      "name": "My server",
+      "host": "transmission.myserver.com",
+      "path": "/my/transmission/rpc",
+      "https": true
     }
   ]
 }
@@ -241,6 +242,7 @@ When using the Web UI, you can import magnet and torrent links using a [bookmark
 You can use the text selection to highlight a magnet link or a hash before cliking on the bookmarklet, otherwise the script will look for a clickable magnet or torrent link in the page.
 
 For mobile users:
+
 1. Long-press the bookmarklet button and select "Copy link address".
 2. Add the current page to your favorites and edit the bookmark.
 3. Replace the address with the one you previously copied and change the name to "Download with Transmissionic".
@@ -260,9 +262,11 @@ To do so, go to "Choose default apps by protocol" in the Windows settings, scrol
 You can configure path mapping on computer, this allow you to match remote paths with local paths to open the file explorer. This parameter works exactly the same way as [Transmission Remote GUI](https://github.com/transmission-remote-gui/transgui).
 
 Example:
+
 ```
 /mnt/ssd = \\192.168.1.1\ssd
 ```
+
 `/mnt/ssd` = Remote path on the server where Transmission daemon is running.
 
 `\\192.168.1.1\ssd` = Local path to access the shared folder.
@@ -394,7 +398,7 @@ npx cap open ios
 
 You can start a local dev server using Ionic, but you need to disable same origin policy in your browser to connect to Transmission RPC from a different host. For example, run a new instance of chrome with these flags : `--disable-web-security --disable-gpu --user-data-dir=~/chromeTemp`
 
-Then start the dev server by running this in the root folder of the project: 
+Then start the dev server by running this in the root folder of the project:
 
 ```
 npm run serve

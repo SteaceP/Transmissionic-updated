@@ -1,4 +1,4 @@
-package com.sleroy.transmissionic;
+package com.steacep.transmissionic;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

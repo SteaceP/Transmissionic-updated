@@ -1,5 +1,5 @@
 {
-  "appId": "com.sleroy.transmissionic",
+  "appId": "com.steacep.transmissionic",
   "productName": "Transmissionic",
   "artifactName": "Transmissionic-${os}-v${version}.${ext}",
   "directories": {

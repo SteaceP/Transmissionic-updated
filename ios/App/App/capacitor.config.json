@@ -1,5 +1,5 @@
 {
-	"appId": "com.sleroy.transmissionic",
+	"appId": "com.steacep.transmissionic",
 	"appName": "Transmissionic",
 	"bundledWebRuntime": false,
 	"npmClient": "npm",
