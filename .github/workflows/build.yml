@@ -35,6 +35,7 @@ jobs:
 
       - name: Create Release
         id: create_release
+        if: ${{ !env.ACT }}
         uses: softprops/action-gh-release@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -74,6 +75,7 @@ jobs:
           zip -r "Transmissionic-webui-${{ needs.dependencies.outputs.version }}.zip" ./web/
 
       - name: Upload Release Asset
+        if: ${{ !env.ACT }}
         uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ needs.dependencies.outputs.version }}
@@ -110,10 +112,16 @@ jobs:
         run: npm ci
 
       - name: Build and publish electron
+        if: ${{ !env.ACT }}
         working-directory: ./electron
         run: npm run electron:publish-linux
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build electron
+        if: ${{ env.ACT }}
+        working-directory: ./electron
+        run: npm run electron:build-linux
 
   build-electron-win:
     name: Build Electron Windows
@@ -145,10 +153,16 @@ jobs:
         run: npm ci
 
       - name: Build and publish electron
+        if: ${{ !env.ACT }}
         working-directory: ./electron
         run: npm run electron:publish-windows
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build electron
+        if: ${{ env.ACT }}
+        working-directory: ./electron
+        run: npm run electron:build-windows
 
   build-electron-mac:
     name: Build Electron macOS
@@ -180,10 +194,16 @@ jobs:
         run: npm ci
 
       - name: Build and publish electron
+        if: ${{ !env.ACT }}
         working-directory: ./electron
         run: npm run electron:publish-mac
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build electron
+        if: ${{ env.ACT }}
+        working-directory: ./electron
+        run: npm run electron:build-mac
 
   build-android:
     name: Build Android
@@ -265,7 +285,7 @@ jobs:
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v3
-        if: ${{ steps.prepare_apk.outputs.apk_path != '' }}
+        if: ${{ !env.ACT && steps.prepare_apk.outputs.apk_path != '' }}
         with:
           tag_name: ${{ needs.dependencies.outputs.version }}
           files: ${{ steps.prepare_apk.outputs.apk_path }}
@@ -314,6 +334,7 @@ jobs:
           zip -r "Transmissionic-ios-${{ needs.dependencies.outputs.version }}.ipa" Payload
 
       - name: Upload Release Asset
+        if: ${{ !env.ACT }}
         uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ needs.dependencies.outputs.version }}
