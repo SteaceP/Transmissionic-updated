@@ -31,13 +31,15 @@ jobs:
 
       - name: Check version
         id: version
+        env:
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
         run: |
           VERSION="v$(node -p "require('./package.json').version")"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           
-          if [ -n "$ACT" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          if [ -n "$ACT" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ] || echo "$COMMIT_MSG" | grep -iqE "\[(rebuild|release|build)\]"; then
             echo "is_new_version=true" >> "$GITHUB_OUTPUT"
-            echo "Triggered via ${{ github.event_name }} or ACT: proceeding."
+            echo "Triggered via ${{ github.event_name }}, ACT, or commit keyword: proceeding."
           elif git ls-remote --tags origin "refs/tags/$VERSION" | grep -q "$VERSION"; then
             echo "is_new_version=false" >> "$GITHUB_OUTPUT"
             echo "Version $VERSION has already been released on GitHub. Skipping release."
